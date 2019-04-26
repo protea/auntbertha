@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-import javax.xml.bind.DatatypeConverter;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import cc.protea.util.http.Request;
@@ -111,16 +109,9 @@ class AuntBerthaUtils {
 		}
 	}
 
-	protected String getAuthorizationHeader(String key) {
-		final String pair = key + ":";
-		final String base64 = DatatypeConverter.printBase64Binary(pair.getBytes());
-		return "Basic " + base64;
-	}
-
 	protected Request getService(final String apiKey, final String url) {
 		String newUrl = addParameter(url, "api_key", apiKey);
 		return new Request(newUrl)
-				.addHeader("Authorization", getAuthorizationHeader(apiKey))
 				.addHeader("Accept", "application/json")
 				.addHeader("Content-Type", "application/json")
 				.addHeader("User-Agent", "AuntBertha Java SDK v" + version);
@@ -128,7 +119,11 @@ class AuntBerthaUtils {
 
 	<T> T convert(final Response response, final Class<T> type) {
 		checkResponse(response);
-		return convert(response.getBody(), type);
+		T out = convert(response.getBody(), type);
+		if (out instanceof AuntBerthaResponse) {
+			((AuntBerthaResponse)out).responseCode = response.getResponseCode();
+		}
+		return out;
 	}
 
 	<T> T convert(final Response response, final TypeReference<T> type) {
@@ -191,6 +186,7 @@ class AuntBerthaUtils {
 			AuntBerthaResponse response = (AuntBerthaResponse) in;
 			response.success = false;
 			response.errorMessage = e.errorMessage;
+			response.responseCode = Integer.valueOf(e.errorCode);
 		}
 		return in;
 	}

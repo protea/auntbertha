@@ -13,4 +13,5 @@ public class AuntBerthaGivesSeekerRequest {
 	@JsonProperty("seeker_request_id") public String seekerRequestId;
 	public String state;
 	public String zipcode;
+	public String neighborhood;
 }
