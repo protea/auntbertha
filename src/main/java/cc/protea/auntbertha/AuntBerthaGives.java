@@ -12,7 +12,7 @@ public class AuntBerthaGives {
 	
 	public AuntBerthaGives(AuntBertha ab) {
 		this.ab = ab;
-		this.urlbase = AuntBertha.urlbase + "ab_gives/v1/";
+		this.urlbase = ab.urlBase + "ab_gives/v1/";
 	}
 	
 	public List<AuntBerthaGivesSeekerRequest> getAllSeekerRequests() {

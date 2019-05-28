@@ -2,7 +2,7 @@ package cc.protea.auntbertha;
 
 public class AuntBertha {
 	
-	static String urlbase = "https://ab-giving-dot-searchbertha-qa1.appspot.com/_ah/api/";
+	String urlBase = "https://www.auntbertha.com/_ah/api/";
 
 	final String apiKey;
 
@@ -10,8 +10,15 @@ public class AuntBertha {
 
 	public AuntBertha(String apiKey) {
 		this.apiKey = apiKey;
-		this.gives = new AuntBerthaGives(this);
-		
+		this.gives = new AuntBerthaGives(this);		
+	}
+
+	public AuntBertha(String apiKey, String urlBase) {
+		this.apiKey = apiKey;
+		if (urlBase != null && urlBase.trim().length() > 0) {
+			this.urlBase = urlBase;
+		}
+		this.gives = new AuntBerthaGives(this);		
 	}
 
 	public final AuntBerthaGives gives;
