@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cc.protea.auntbertha.gives.AuntBerthaGivesSeekerRequest;
+import cc.protea.auntbertha.search.AuntBerthaProgram;
 
 public class SeekerTest {
 
@@ -19,7 +20,6 @@ public class SeekerTest {
 		Assume.assumeNotNull(auntBertha);
 	}
 
-
 	@Test
 	public void testSeekerList() throws Exception {
 		List<AuntBerthaGivesSeekerRequest> requests = auntBertha.gives.getAllSeekerRequests();
@@ -27,7 +27,13 @@ public class SeekerTest {
 		System.out.println(AuntBerthaJsonUtil.toJson(requests));
 	}
 
-
+	@Test
+	public void testProgramList() throws Exception {
+		List<AuntBerthaProgram> programs = auntBertha.search.getByServiceTag("78701", "food pantry");
+		Assert.assertNotNull(programs);
+		System.out.println(AuntBerthaJsonUtil.toJson(programs));
+	}
+	
 	private static AuntBertha getAuntBertha() {
 		final String apiKey = System.getenv("AUNTBERTHA_API_KEY");
 		if (apiKey == null) {

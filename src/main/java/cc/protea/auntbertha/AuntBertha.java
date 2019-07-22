@@ -10,7 +10,8 @@ public class AuntBertha {
 
 	public AuntBertha(String apiKey) {
 		this.apiKey = apiKey;
-		this.gives = new AuntBerthaGives(this);		
+		this.gives = new AuntBerthaGives(this);
+		this.search = new AuntBerthaSearch(this);
 	}
 
 	public AuntBertha(String apiKey, String urlBase) {
@@ -18,9 +19,11 @@ public class AuntBertha {
 		if (urlBase != null && urlBase.trim().length() > 0) {
 			this.urlBase = urlBase;
 		}
-		this.gives = new AuntBerthaGives(this);		
+		this.gives = new AuntBerthaGives(this);	
+		this.search = new AuntBerthaSearch(this);
 	}
 
 	public final AuntBerthaGives gives;
+	public final AuntBerthaSearch search;
 
 }
