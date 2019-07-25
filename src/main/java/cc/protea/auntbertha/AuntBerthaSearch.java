@@ -25,4 +25,13 @@ public class AuntBerthaSearch {
 		return response.programs;
 	}
 	
+	public List<AuntBerthaProgram> getBySearchTerm(String zipcode, String searchTerm) {
+		String url = urlbase + 
+				"zipcodes/" + AuntBerthaUtils.encode(AuntBerthaUtils.trim(zipcode)) + 
+				"/programs";
+		url = AuntBerthaUtils.addParameter(url, "terms", AuntBerthaUtils.trim(searchTerm));
+		url = AuntBerthaUtils.addParameter(url, "cookie", "protea");
+		AuntBerthaSearchProgramListResponse response = ab.utils.get(ab.apiKey, url, AuntBerthaSearchProgramListResponse.class);
+		return response.programs;
+	}
 }
