@@ -6,7 +6,7 @@
 
 	<groupId>cc.protea.auntbertha</groupId>
 	<artifactId>auntbertha</artifactId>
-	<version>0.1.4</version>
+	<version>0.1.5</version>
 	<packaging>jar</packaging>
 
 	<name>Aunt Bertha API</name>
